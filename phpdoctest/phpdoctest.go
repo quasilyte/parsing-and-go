@@ -69,6 +69,18 @@ func Run(t *testing.T, p parser) {
 		if typ.String() != test.expect {
 			t.Errorf("parse `%s`:\nhave `%s`\nwant `%s`",
 				test.input, typ.String(), test.expect)
+			continue
 		}
+		typ2, err := p.Parse(typ.String())
+		if err != nil {
+			t.Errorf("re-parse `%s` error: %v", typ.String(), err)
+			continue
+		}
+		if typ.String() != typ2.String() {
+			t.Errorf("re-parsed representation mismatch:\nA: `%s`\nB: `%s`",
+				typ.String(), typ2.String())
+			continue
+		}
+
 	}
 }
