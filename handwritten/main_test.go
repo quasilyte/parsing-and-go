@@ -3,34 +3,30 @@ package main
 import (
 	"testing"
 
-	"github.com/alecthomas/participle/v2"
 	"github.com/quasilyte/parsing-in-go/phpdoc"
 	"github.com/quasilyte/parsing-in-go/phpdoctest"
 )
 
 type parserWrapper struct {
-	parser *participle.Parser
+	parser *TypeParser
 }
 
 func (p *parserWrapper) Parse(s string) (phpdoc.Type, error) {
-	var result UnionExpr
-	if err := p.parser.ParseString("", s, &result); err != nil {
-		return nil, err
-	}
+	typ := p.parser.Parse(s)
 	var conv converter
-	return conv.Convert(&result), nil
+	return conv.Convert(typ.Expr), nil
 }
 
 func TestMain(t *testing.T) {
 	parser := &parserWrapper{
-		parser: participle.MustBuild(&UnionExpr{}),
+		parser: NewTypeParser(),
 	}
 	phpdoctest.Run(t, parser)
 }
 
 func BenchmarkParser(b *testing.B) {
 	parser := &parserWrapper{
-		parser: participle.MustBuild(&UnionExpr{}),
+		parser: NewTypeParser(),
 	}
 	phpdoctest.RunBenchmark(b, parser)
 }

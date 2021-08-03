@@ -9,10 +9,6 @@ import (
 	"github.com/alecthomas/participle/v2"
 )
 
-// Note: using something like `@@ "|" @@` will cause infinite recursion.
-// Note: this "grammar" produces inefficient AST, so it's impractical for big
-// inputs, but OK for phpdoc types
-
 type PrimaryExpr struct {
 	TypeName *TypeNameExpr `@@`
 	Parens   *UnionExpr    `| "(" @@ ")"`

@@ -10,6 +10,30 @@ type parser interface {
 	Parse(s string) (phpdoc.Type, error)
 }
 
+func RunBenchmark(b *testing.B, p parser) {
+	tests := []struct {
+		label string
+		input string
+	}{
+		{`simple`, `int`},
+		{`complex`, `(?a|c|false)&d`},
+		{`array`, `int[][]`},
+		{`classname`, `A\B\C\D`},
+	}
+
+	for _, test := range tests {
+		input := test.input
+		b.Run(test.label, func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				_, err := p.Parse(input)
+				if err != nil {
+					b.Fatal(err)
+				}
+			}
+		})
+	}
+}
+
 func Run(t *testing.T, p parser) {
 	tests := []struct {
 		input  string
@@ -23,7 +47,6 @@ func Run(t *testing.T, p parser) {
 		{`A`, `A`},
 		{`A\B`, `A\B`},
 		{`A\B\C`, `A\B\C`},
-		{`A \ B \ C`, `A\B\C`},
 
 		{`(int)`, `int`},
 		{`((int))`, `int`},
