@@ -15,10 +15,12 @@ func RunBenchmark(b *testing.B, p parser) {
 		label string
 		input string
 	}{
-		{`simple`, `int`},
-		{`complex`, `(?a|c|false)&d`},
-		{`array`, `int[][]`},
-		{`classname`, `A\B\C\D`},
+		{`normal`, `Foo|Bar|null`},
+		// {`simple`, `int`},
+		// {`complex`, `(?a|c|false)&d`},
+		// {`array`, `int[][]`},
+		// {`classname`, `A\B\C\D`},
+		// {`whitespace`, `   (    int   )  `},
 	}
 
 	for _, test := range tests {
@@ -43,6 +45,8 @@ func Run(t *testing.T, p parser) {
 		{`float`, `float`},
 		{`string`, `string`},
 		{`bool`, `bool`},
+
+		{`   (    int   )  `, `int`},
 
 		{`A`, `A`},
 		{`A\B`, `A\B`},
@@ -87,6 +91,10 @@ func Run(t *testing.T, p parser) {
 		typ, err := p.Parse(` ` + test.input + ` `)
 		if err != nil {
 			t.Errorf("parse `%s` error: %v", test.input, err)
+			continue
+		}
+		if typ == nil {
+			t.Errorf("parse `%s` returned type is nil!", test.input)
 			continue
 		}
 		if typ.String() != test.expect {
