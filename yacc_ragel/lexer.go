@@ -29,20 +29,17 @@ func (l *PhpdocLex) Lex(lval *PhpdocSymType) int {
     tok := 0
 
     data := l.src
-    // current state, data ptr, data ptr end
     cs, p, pe := 0, l.pos, len(data)
     eof := pe
-    // token start, token end
     var ts, te int
     var act int
 
     
-//line phpdoc.rl:54
+//line phpdoc.rl:52
 
 
-    // --init
     
-//line lexer.go:46
+//line lexer.go:43
 	{
 	cs = lexer_start
 	ts = 0
@@ -50,10 +47,9 @@ func (l *PhpdocLex) Lex(lval *PhpdocSymType) int {
 	act = 0
 	}
 
-//line phpdoc.rl:58
-    // --exec
+//line phpdoc.rl:55
     
-//line lexer.go:57
+//line lexer.go:53
 	{
 	if p == pe {
 		goto _test_eof
@@ -106,12 +102,12 @@ func (l *PhpdocLex) Lex(lval *PhpdocSymType) int {
 	}
 	goto st_out
 tr0:
-//line phpdoc.rl:52
+//line phpdoc.rl:50
 te = p+1
 { tok = int(data[ts]); {p++; cs = 0; goto _out } }
 	goto st0
 tr1:
-//line phpdoc.rl:44
+//line phpdoc.rl:42
 te = p+1
 
 	goto st0
@@ -143,7 +139,7 @@ tr8:
 	
 	goto st0
 tr9:
-//line phpdoc.rl:51
+//line phpdoc.rl:49
 te = p
 p--
 { tok = T_NAME; {p++; cs = 0; goto _out } }
@@ -159,7 +155,7 @@ ts = 0
 //line NONE:1
 ts = p
 
-//line lexer.go:163
+//line lexer.go:159
 		switch data[p] {
 		case 9:
 			goto tr1
@@ -195,49 +191,49 @@ tr2:
 //line NONE:1
 te = p+1
 
-//line phpdoc.rl:51
+//line phpdoc.rl:49
 act = 8;
 	goto st1
 tr12:
 //line NONE:1
 te = p+1
 
-//line phpdoc.rl:50
+//line phpdoc.rl:48
 act = 7;
 	goto st1
 tr17:
 //line NONE:1
 te = p+1
 
-//line phpdoc.rl:49
+//line phpdoc.rl:47
 act = 6;
 	goto st1
 tr20:
 //line NONE:1
 te = p+1
 
-//line phpdoc.rl:46
+//line phpdoc.rl:44
 act = 3;
 	goto st1
 tr22:
 //line NONE:1
 te = p+1
 
-//line phpdoc.rl:45
+//line phpdoc.rl:43
 act = 2;
 	goto st1
 tr25:
 //line NONE:1
 te = p+1
 
-//line phpdoc.rl:47
+//line phpdoc.rl:45
 act = 4;
 	goto st1
 tr30:
 //line NONE:1
 te = p+1
 
-//line phpdoc.rl:48
+//line phpdoc.rl:46
 act = 5;
 	goto st1
 	st1:
@@ -245,7 +241,7 @@ act = 5;
 			goto _test_eof1
 		}
 	st_case_1:
-//line lexer.go:249
+//line lexer.go:245
 		switch data[p] {
 		case 91:
 			goto tr8
@@ -967,14 +963,13 @@ act = 5;
 	_out: {}
 	}
 
-//line phpdoc.rl:60
+//line phpdoc.rl:56
 
     l.pos = p
     if tok == T_NAME {
         lval.text = data[ts:te]
     }
 
-    // fmt.Printf("ch=%c (%d)\n", tok, tok)
 	return tok
 }
 
@@ -982,9 +977,8 @@ func (l *PhpdocLex) Error(s string) {
 	fmt.Printf("syntax error: %s\n", s)
 }
 
-// --data
 
-//line lexer.go:988
+//line lexer.go:982
 const lexer_start int = 0
 const lexer_first_final int = 0
 const lexer_error int = -1
@@ -992,4 +986,4 @@ const lexer_error int = -1
 const lexer_en_main int = 0
 
 
-//line phpdoc.rl:76
+//line phpdoc.rl:70

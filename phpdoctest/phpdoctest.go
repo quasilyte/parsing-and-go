@@ -15,12 +15,12 @@ func RunBenchmark(b *testing.B, p parser) {
 		label string
 		input string
 	}{
+		{`simple`, `int`},
 		{`normal`, `Foo|Bar|null`},
-		// {`simple`, `int`},
-		// {`complex`, `(?a|c|false)&d`},
-		// {`array`, `int[][]`},
-		// {`classname`, `A\B\C\D`},
-		// {`whitespace`, `   (    int   )  `},
+		{`complex`, `(?a|c|false)&d`},
+		{`array`, `int[][]`},
+		{`classname`, `A\B\C\D`},
+		{`whitespace`, `   (    int   )  `},
 	}
 
 	for _, test := range tests {
