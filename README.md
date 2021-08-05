@@ -1,4 +1,4 @@
-# parsing-in-go
+# Parsing & Go
 
 > This repository provides examples I referred to in "Parsing & Go" talk
 
