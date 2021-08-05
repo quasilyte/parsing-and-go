@@ -21,6 +21,10 @@ These example parsers understand these types (and their combinations):
 | union type | `X\|Y` |
 | intersection type | `X&Y` |
 
+Package [phpdoc](/phpdoc) defines the common AST constructed by every parser.
+
+Package [phpdoctest](/phpdoctest) contains test cases that are used to test every parser.
+
 Every parser package is a `main` that can parse a command-line argument:
 
 ```bash
