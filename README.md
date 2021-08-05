@@ -21,6 +21,18 @@ These example parsers understand these types (and their combinations):
 | union type | `X\|Y` |
 | intersection type | `X&Y` |
 
+Every parser package is a `main` that can parse a command-line argument:
+
+```bash
+go run ./participle 'int|Foo\Bar'
+
+go run ./yacc 'int|Foo\Bar'
+
+go run ./yacc_ragel 'int|Foo\Bar'
+
+go run ./handwritten 'int|Foo\Bar'
+```
+
 Some useful `make` commands:
 
 ```bash
