@@ -1,16 +1,20 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"strings"
 )
 
 func main() {
-	input := "int|?float"
+	flag.Parse()
+
 	lexer := NewLexer()
-	lexer.s.Init(strings.NewReader(input))
+	lexer.s.Init(strings.NewReader(flag.Args()[0]))
 	parser := PhpdocParserImpl{}
 	status := parser.Parse(lexer)
 	fmt.Println(status)
-	fmt.Println(lexer.result)
+	ast := lexer.result
+	fmt.Printf("%#v\n", ast)
+	fmt.Printf("%s\n", ast)
 }
